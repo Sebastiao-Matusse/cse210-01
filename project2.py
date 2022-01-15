@@ -21,24 +21,32 @@ def prompt_yes_no(question):
     return response
 
 def main():
-    player_one, player_two = pieces()
-    turn = X
-    board = create_board()
-    display_board(board)
-
-    while not winner(board):
-        if turn == player_one:
-            move = player_one_move(board, player_one)
-            board[move] = player_one
-        else:
-            move = player_two_move(board, player_two)
-            board[move] = player_two
+    try:
+        player_one, player_two = pieces()
+        turn = X
+        board = create_board()
         display_board(board)
+
+        while not winner(board):
+            if turn == player_one:
+                move = player_one_move(board, player_one)
+                board[move] = player_one
+            else:
+                move = player_two_move(board, player_two)
+                board[move] = player_two
+            display_board(board)
+            turn = next_turn(turn)
+        
+        the_winner = winner(board)
         turn = next_turn(turn)
-    
-    the_winner = winner(board)
-    turn = next_turn(turn)
-    congrat_winer(the_winner, player_one, player_two)
+        congrat_winer(the_winner, player_one, player_two)
+
+    except ValueError as val_err:
+        print()
+        print("Error:", val_err)
+        print("Run the the program again and type a number.")
+        print()
+
 
 def create_board():
     """Create a new board
