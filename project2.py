@@ -3,23 +3,22 @@ from urllib import response
 Name: Sebastiao Joao Matusse
 project: Tic-Tac-Tie Game"""
 
+# These are Global variables
 X = "X"
 O = "O"
-
 empty = " "
 tie = "Tie"
-NUM_SQUARES = 9
+NUM_SQUARES = 10
+
 def display_instruct():
 
     pass
 
-def prompt_y_n():
-
-    pass
-
-def prompt_board_num():
-
-    pass
+def prompt_yes_no(question):
+    response = None
+    while response not in ("y", "no"):
+        response = input(question).lower()
+    return response
 
 def main():
     player_one, player_two = pieces()
@@ -42,7 +41,8 @@ def main():
     congrat_winer(the_winner, player_one, player_two)
 
 def create_board():
-    # Create a new board.
+    """Create a new board
+    """
 
     board = []
     for square in range(NUM_SQUARES):
@@ -52,11 +52,11 @@ def create_board():
 def display_board(board):
     
 
-    print("\n\t", board[0], "|", board[1], "|", board[2])
+    print("\n\t", board[1], "|", board[2], "|", board[3])
     print("\t","-+-+-+-+-")
-    print("\t", board[3], "|", board[4], "|", board[5])
+    print("\t", board[4], "|", board[5], "|", board[6])
     print("\t","-+-+-+-+-")
-    print("\t", board[6], "|", board[7], "|", board[8])
+    print("\t", board[7], "|", board[8], "|", board[9])
 
 def legal_moves(board):
     moves = []
@@ -67,7 +67,7 @@ def legal_moves(board):
 
 def winner(board):
     WAYS_TO_WIN = ((0, 1, 2),
-                   (3, 4, 5,),
+                   (3, 4, 5),
                    (6, 7, 8),
                    (1, 4, 7),
                    (0, 4, 8),
@@ -79,12 +79,6 @@ def winner(board):
         if empty not in board:
             return tie
 
-def ask_yes_no(question):
-    response = None
-    while response not in ("y", "no"):
-        response = input(question).lower()
-    return response
-
 def ask_number(question, low, high):
     response = None
     while response not in range(low, high):
@@ -92,7 +86,7 @@ def ask_number(question, low, high):
     return response
 
 def pieces():
-    go_first = ask_yes_no("Do you require the fist move? (y/n): ")
+    go_first = prompt_yes_no("Do you require the fist move? (y/n): ")
     if go_first == "y" or go_first == "n":
         player_one = X
         player_two = O
