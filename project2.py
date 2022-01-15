@@ -1,5 +1,7 @@
 from urllib import response
-
+"""
+Name: Sebastiao Joao Matusse
+project: Tic-Tac-Tie Game"""
 
 X = "X"
 O = "O"
