@@ -1,28 +1,23 @@
 from urllib import response
-"""
-Name: Sebastiao Joao Matusse
-project: Tic-Tac-Tie Game"""
 
-# These are Global variables
+"""
+Project: Tic-Tac-Toe Game
+Name: Sebastiao Joao Matusse
+"""
+
+#Global variables
 X = "X"
 O = "O"
 empty = " "
 tie = "Tie"
 NUM_SQUARES = 10
 
-def display_instruct():
 
-    pass
-
-def prompt_yes_no(question):
-    response = None
-    while response not in ("y", "no"):
-        response = input(question).lower()
-    return response
 
 def main():
     try:
-        player_one, player_two = pieces()
+        player_one = X
+        player_two = O
         turn = X
         board = create_board()
         display_board(board)
@@ -48,6 +43,12 @@ def main():
         print()
 
 
+def prompt_yes_no(question):
+    response = None
+    while response not in ("y", "n"):
+        response = input(question).lower()
+    return response
+
 def create_board():
     """Create a new board
     """
@@ -59,7 +60,6 @@ def create_board():
 
 def display_board(board):
     
-
     print("\n\t", board[1], "|", board[2], "|", board[3])
     print("\t","-+-+-+-+-")
     print("\t", board[4], "|", board[5], "|", board[6])
@@ -93,13 +93,6 @@ def ask_number(question, low, high):
         response = int(input(question))
     return response
 
-def pieces():
-    go_first = prompt_yes_no("Do you require the fist move? (y/n): ")
-    if go_first == "y" or go_first == "n":
-        player_one = X
-        player_two = O
-    return player_one, player_two
-
 
 def player_one_move(board, player_one):
     legal = legal_moves(board)
@@ -108,7 +101,6 @@ def player_one_move(board, player_one):
         move = ask_number("Where will you move? (0 - 8):", 0, NUM_SQUARES)
         if move not in legal:
             print("\nThat square is already occupied, please choose another square")
-    print("Fine...")
     return move
 
 
@@ -119,20 +111,21 @@ def player_two_move(board, player_two):
         move = ask_number("Where will you move? (0 - 8):", 0, NUM_SQUARES)
         if move not in legal:
             print("\nThat square is already occupied, please choose another square")
-    print("Fine...")
     return move
 
 
 def next_turn(turn):
     if turn == X:
+        print("It is O's turn: ")
         return O
     else:
+        print("It is X's turn: ")
         return X
 
 def congrat_winer(the_winner, player_one, player_two):
     if the_winner != tie:
         print(the_winner, "won!\n")
     else:
-        print("It is a tie\n")
+        print("It is a draw\n")
 
 main()
